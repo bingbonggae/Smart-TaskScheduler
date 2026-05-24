@@ -22,7 +22,7 @@ Detect Cycle
 
 Language:
 
-C++
+C
 
 Author:
 

@@ -1,33 +1,13 @@
 #ifndef TASK_H
 #define TASK_H
 
-#include <string>
-using namespace std;
-
-class Task {
-
-public:
+typedef struct {
 
     int id;
-    string name;
+    char name[50];
     int priority;
     int deadline;
 
-    Task() {}
-
-    Task(
-        int i,
-        string n,
-        int p,
-        int d
-    )
-    {
-        id = i;
-        name = n;
-        priority = p;
-        deadline = d;
-    }
-
-};
+} Task;
 
 #endif

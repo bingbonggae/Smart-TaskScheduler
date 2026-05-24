@@ -1,53 +1,45 @@
 #ifndef TASKSCHEDULER_H
 #define TASKSCHEDULER_H
 
-#include <vector>
-#include <queue>
-#include <unordered_map>
-#include <stack>
-#include <iostream>
+#include <stdio.h>
+#include <string.h>
 #include "Task.h"
 
-using namespace std;
+#define MAX_TASKS 100
 
-class TaskScheduler {
+typedef struct {
 
-private:
+    Task tasks[MAX_TASKS];
+    int count;
 
-    struct Compare {
+    int graph[MAX_TASKS][MAX_TASKS];
 
-        bool operator()(Task a, Task b) {
+} TaskScheduler;
 
-            return a.priority < b.priority;
+void addTask(
+    TaskScheduler *scheduler,
+    int id,
+    char name[],
+    int priority,
+    int deadline
+);
 
-        }
+void addDependency(
+    TaskScheduler *scheduler,
+    int task,
+    int dependsOn
+);
 
-    };
+void executeTask(
+    TaskScheduler *scheduler
+);
 
-    priority_queue<Task, vector<Task>, Compare> pq;
+void showTasks(
+    TaskScheduler *scheduler
+);
 
-    unordered_map<int, vector<int>> graph;
-
-public:
-
-    void addTask(
-        int id,
-        string name,
-        int priority,
-        int deadline
-    );
-
-    void addDependency(
-        int task,
-        int dependsOn
-    );
-
-    void executeTask();
-
-    void showTasks();
-
-    bool detectCycle();
-
-};
+int detectCycle(
+    TaskScheduler *scheduler
+);
 
 #endif
